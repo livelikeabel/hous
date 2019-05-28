@@ -20,7 +20,7 @@ class App extends Component {
 
   _handleDetecting = () => {
     this.setState({
-      plus: 30
+      plus: 33 // 30이 아닌 33을 더해야 할거 같아요..!
     });
   };
 
@@ -37,7 +37,7 @@ class App extends Component {
   setStating() {
     return {
       sNumber: 13,
-      pass: function() {
+      pass: () => { // 함수의 this가 선언시점의 렉시컬 스코프로 동작하는 arrow함수로 바꾸어야 기대했던 동작대로 됩니다..!
         var substract;
         return (substract = this.sNumber);
       }
@@ -45,8 +45,8 @@ class App extends Component {
   }
 
   init() {
-    var substract = this.setStating.call({ sNumber: -33 }).pass();
-
+    var substract = this.setStating.call({ sNumber: -33 }).pass(); // call을 통해 this변경!, 새로 넘긴 객체의 sNumber를 pass()의 this.sNumber로 사용하고 싶은 의도인것 같네요!
+    
     this.setState({ substract });
   }
 
